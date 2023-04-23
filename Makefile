@@ -2,5 +2,5 @@ install:
 	npm install
 lint:
 	npx eslint .
-gendiff:
-	npx babel-node src/bin/gendiff.js
+make gendiff:
+	npx babel-node src/gendiff.js
