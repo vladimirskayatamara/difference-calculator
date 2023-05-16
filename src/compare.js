@@ -17,7 +17,9 @@ const compareObject = (content1, content2) => {
       return { key, type: 'deleted', value: content1[key] };
     }
     if (content1[key] !== content2[key]) {
-      return { key, type: 'changed', oldValue: content1[key], newValue: content2[key] };
+      return {
+        key, type: 'changed', oldValue: content1[key], newValue: content2[key],
+      };
     }
     return { key, type: 'unchanged', value: content2[key] };
   });
