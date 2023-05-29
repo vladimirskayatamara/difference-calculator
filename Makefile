@@ -8,4 +8,4 @@ make gendiff:
 	npx babel-node src/gendiff.js
 
 test:
-	npm test
+	npx jest

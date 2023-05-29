@@ -1,42 +1,26 @@
+import path, { dirname } from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import path from 'path';
 import genDiff from '../src/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
+
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-const testCases = [
-  {
-    format: undefined,
-    expectedFile: 'expected_file_stylish.txt',
-  },
-  {
-    format: 'stylish',
-    expectedFile: 'expected_file_stylish.txt',
-  },
-  {
-    format: 'plain',
-    expectedFile: 'expected_file_plain.txt',
-  },
-  {
-    format: 'json',
-    expectedFile: 'expected_file_json.json',
-  },
-];
+const expectNestedStylish = readFile('expected_file_stylish.txt');
+const expectNestedPlain = readFile('expected_file_plain.txt');
+const expectNestedJson = readFile('expected_file_json.txt');
 
-describe.each(testCases)('testing function genDiff $format formatter', ({ format, expectedFile }) => {
-  const expected = readFile(expectedFile);
+const extensions = ['json', 'yml'];
 
-  test('json files compare', () => {
-    const actual = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), format);
-    expect(actual).toBe(expected);
-  });
+test.each(extensions)('diff formats of files (.json .yml)', (extension) => {
+  const fileName1 = `${getFixturePath('file1')}.${extension}`;
+  const fileName2 = `${getFixturePath('file2')}.${extension}`;
 
-  test('yaml files compare', () => {
-    const actual = genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'), format);
-    expect(actual).toBe(expected);
-  });
+  expect(genDiff(fileName1, fileName2, 'stylish')).toEqual(expectNestedStylish);
+  expect(genDiff(fileName1, fileName2, 'plain')).toEqual(expectNestedPlain);
+  expect(genDiff(fileName1, fileName2, 'json')).toEqual(expectNestedJson);
+  expect(genDiff(fileName1, fileName2)).toEqual(expectNestedStylish);
 });

@@ -1,17 +1,14 @@
-import stylish from './stylish.js';
-import plain from './plain.js';
+import renderStylish from './stylish.js';
+import renderPlain from './plain.js';
+import renderJson from './json.js';
 
-const formatDiff = (data, format) => {
-  switch (format) {
-    case 'stylish':
-      return stylish(data);
-    case 'plain':
-      return plain(data);
-    case 'json':
-      return JSON.stringify(data);
-    default:
-      throw new Error(`Unknown formatter: '${format}'!`);
-  }
+const formatMap = {
+  stylish: renderStylish,
+  plain: renderPlain,
+  json: renderJson,
 };
 
-export default formatDiff;
+export default (data, nameFormater) => {
+  const render = formatMap[nameFormater];
+  return render(data);
+};

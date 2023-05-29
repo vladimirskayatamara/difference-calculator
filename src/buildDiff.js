@@ -1,30 +1,21 @@
 import _ from 'lodash';
 
-const buildDiff = (data1, data2) => {
-  const keys1 = Object.keys(data1);
-  const keys2 = Object.keys(data2);
-  const sortedKeys = _.sortBy(_.union(keys1, keys2));
-
-  return sortedKeys.map((key) => {
-    if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
-      return { key, children: buildDiff(data1[key], data2[key]), status: 'nested' };
+const buildDiff = (obj1, obj2) => {
+  const sortesKeys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)));
+  return sortesKeys.map((key) => {
+    if (!Object.hasOwn(obj1, key)) {
+      return { name: key, status: 'added', value: obj2[key] };
     }
-    if (!Object.hasOwn(data1, key)) {
-      return { key, value: data2[key], status: 'added' };
+    if (!Object.hasOwn(obj2, key)) {
+      return { name: key, status: 'deleted', value: obj1[key] };
     }
-    if (!Object.hasOwn(data2, key)) {
-      return { key, value: data1[key], status: 'deleted' };
+    if ((_.isObject(obj1[key])) && (_.isObject(obj2[key]))) {
+      return { name: key, status: 'nested', children: buildDiff(obj1[key], obj2[key]) };
     }
-    if (!_.isEqual(data1[key], data2[key])) {
-      return {
-        key,
-        valueOld: data1[key],
-        valueNew: data2[key],
-        status: 'changed',
-      };
+    if (_.isEqual(obj1[key], obj2[key])) {
+      return { name: key, status: 'unchanged', value: obj1[key] };
     }
-
-    return { key, value: data1[key], status: 'unchanged' };
+    return { name: key, status: 'changed', value: { old: obj1[key], new: obj2[key] } };
   });
 };
 
