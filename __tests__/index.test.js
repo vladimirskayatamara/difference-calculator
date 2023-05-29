@@ -11,7 +11,7 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 
 const expectNestedStylish = readFile('expected_file_stylish.txt');
 const expectNestedPlain = readFile('expected_file_plain.txt');
-const expectNestedJson = readFile('expected_file_json.txt');
+const expectNestedJson = readFile('expected_file_json.json');
 
 const extensions = ['json', 'yml'];
 
