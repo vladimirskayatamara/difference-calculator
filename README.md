@@ -12,7 +12,7 @@ Utility features:
 
 ## Installation
 - Clone this repo ``git clone https://github.com/vladimirskayatamara/difference-calculator.git``
-- Change directory to the project's directory ``cd frontend-project-46``
+- Change directory to the project's directory ``cd difference-calculator``
 - Run ``make install``
 - Install the package on your system using ``npm link``. May require running with ``sudo``
 
