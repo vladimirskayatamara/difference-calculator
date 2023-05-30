@@ -1,5 +1,5 @@
-[![Actions Status](https://github.com/vladimirskayatamara/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/vladimirskayatamara/frontend-project-46/actions)
-<a href="https://codeclimate.com/github/vladimirskayatamara/frontend-project-46/maintainability"><img src="https://api.codeclimate.com/v1/badges/d556ae4a63e6cacefac7/maintainability" /></a>
+[![Actions Status](https://github.com/vladimirskayatamara/difference-calculator/workflows/hexlet-check/badge.svg)](https://github.com/vladimirskayatamara/difference-calculator/actions)
+<a href="https://codeclimate.com/github/vladimirskayatamara/difference-calculator/maintainability"><img src="https://api.codeclimate.com/v1/badges/d556ae4a63e6cacefac7/maintainability" /></a>
 
 # Difference calculator
 
@@ -11,7 +11,7 @@ Utility features:
 - Report generation in the form of plain text, stylish and json.
 
 ## Installation
-- Clone this repo ``git clone https://github.com/vladimirskayatamara/frontend-project-46.git``
+- Clone this repo ``git clone https://github.com/vladimirskayatamara/difference-calculator.git``
 - Change directory to the project's directory ``cd frontend-project-46``
 - Run ``make install``
 - Install the package on your system using ``npm link``. May require running with ``sudo``
